@@ -1,10 +1,11 @@
-import React, {useState}from "react"
+import React, {useState,useEffect}from "react"
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import "../component/Styles/Movies.css"
 import axios from "axios"
 import { Link, Router } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -24,8 +25,7 @@ function Movies(){
 
     axios.get(`http://www.omdbapi.com/?type=movie&apikey=a1b5f9ec&&s=${query}`)
     .then(function (response) {
-     
-      console.log(response.data);
+      // Request succesful storting data in state
       setData(response.data.Search)
     })
     .catch(function (error) {
@@ -34,6 +34,8 @@ function Movies(){
     })
    
   }
+
+  
 
   return (
     <div>
@@ -49,11 +51,11 @@ function Movies(){
 
       </div>
 
-      <div  className="Movies-HeadContainer">
+      <div className="Movies-HeadContainer" >
 
         {data.map((item)=>
 
-        <div style={{width:"40%",float:"left"}}>
+        <div style={{width:"40%",float:"left"}} >
 
         <Link  to={`/movies/${item.imdbID}`}>
            <div  >

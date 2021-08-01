@@ -3,26 +3,22 @@ import { useParams } from "react-router"
 import axios from "axios"
 import "../component/Styles/MoviesDetails.css"
 
-import Aos from "aos";
 
 const MoviesDetails = ()=>{
 
-  const [info,SetInfo] = useState([])
+  const [info,SetInfo] = useState([])  
 
+
+  /// Getting the id details from useParams
   const {id} = useParams()
 
-  console.log(id,"hello")
-    
-
-  useEffect(() => {
-      Aos.init({ duration: 4000 });
-  });
+  // Fetching Movies Data with Id
 
   useEffect(()=>{
       axios.get(`http://www.omdbapi.com/?i=${id}&apikey=a1b5f9ec`)
+
       .then(function (response) {
-     
-      console.log(response.data);
+      // Request succesful storting data in state
       SetInfo(response.data)
   })
       .catch(function (error) {
@@ -33,7 +29,7 @@ const MoviesDetails = ()=>{
   
     return(
 
-        <div style={{ width:"50%",marginLeft:"20%",float:"left",marginTop:"30px"}} data-aos="fade-up">
+        <div style={{ width:"50%",marginLeft:"20%",float:"left",marginTop:"30px"}} >
             <img src={info.Poster}alt=""  />
             <div className="Head-Container">
   
